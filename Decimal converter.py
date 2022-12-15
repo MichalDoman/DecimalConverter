@@ -50,18 +50,15 @@ def decimal_to_binary(number, numeral_system):
     total += (numeral_system ** (i - 1))
     diff = number - total
     binary_str = ''.join(binary)
+
     while not conversion_test(number, binary_str, numeral_system):
-        if diff == 0:
-            return binary_str
-        else:
-            i = 0
-            while (numeral_system ** i) <= diff:
-                i += 1
-            total += (numeral_system ** (i - 1))
-            print(total)
-            print(diff)
-            binary[i - 1] = '1'
-            binary_str = ''.join(binary)
+        i = 0
+        while (numeral_system ** i) <= diff:
+            i += 1
+        total += (numeral_system ** (i - 1))
+        diff = number - total
+        binary[i - 1] = '1'
+        binary_str = ''.join(binary)
     return binary_str
 
 if __name__ == '__main__':
