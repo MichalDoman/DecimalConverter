@@ -5,20 +5,23 @@ def main():
 
     while True:
         input_value = input('Type in a decimal number: ')
-        if not integer_test(input_value):
-            print('This is not a number! Try again: ')
+        if not input_test(input_value):
+            print('This is not a valid entry! Try again: ')
+            print()
             continue
-        print(decimal_to_binary(int(input_value), 2))
+        # print(decimal_to_binary(int(input_value), 2))
+        print()
+        print(conversion_test(7, '12', 3))
 
 
-def integer_test(number):
-    """Checks if the parameter is a digit.
+def input_test(number):
+    """Checks if the parameter is a natural number.
 
     :param: an element to be checked.
-    :return: returns a boolean whether the element is a digit or not.
+    :return: returns a boolean whether the element is a natural number or not.
     """
 
-    if number.isdigit():
+    if number.isdigit() and number != '0':
         return True
     else:
         return False
@@ -27,8 +30,8 @@ def integer_test(number):
 def conversion_test(number, outcome, numeral_system):
     total = 0
     for i in range(1, len(outcome) + 1):
-        if outcome[int(i) - 1] == '1':
-            total += (numeral_system ** (int(i) - 1))  # Works only for binary
+        if outcome[int(i) - 1] != '0':
+            total += ((numeral_system ** (int(i) - 1)) * int(outcome[int(i) - 1]))
     if total == number:
         return True
     else:
@@ -36,10 +39,10 @@ def conversion_test(number, outcome, numeral_system):
 
 
 def decimal_to_binary(number, numeral_system):
-    i = 0
     total = 0
     binary = []
 
+    i = 0
     while (numeral_system ** i) <= number:
         i += 1
 
@@ -59,7 +62,7 @@ def decimal_to_binary(number, numeral_system):
         diff = number - total
         binary[i - 1] = '1'
         binary_str = ''.join(binary)
-    return binary_str
+    return binary_str[::-1]
 
 if __name__ == '__main__':
     main()
