@@ -100,10 +100,15 @@ def convert_decimals(number, numeral_system):
     return new_digits_str
 
 
-def proper_display(number_str):
+def proper_display(number_str, numeral_system):
     new_str = ''
     str_part = ''
     temp = ''
+
+
+    # TODO:if numeral_system < 10:
+    #  else:
+    #  after 2 digits ';'.join()
 
     for digit in number_str:
         str_part += digit
