@@ -6,21 +6,38 @@ def main():
     print(' Welcome to the Decimal Converter!')
     print('-----------------------------------')
 
+    numeral_systems = {2: 'Binary',
+                       3: 'Ternary',
+                       4: 'Quaternary',
+                       5: 'Quinary',
+                       6: 'Senary',
+                       7: 'Septenary',
+                       8: 'Octal',
+                       9: 'Nonary',
+                       10: 'Decimal',
+                       11: 'Undecimal',
+                       12: 'Duodecimal',
+                       13: 'Tridecimal',
+                       14: 'Tetradecimal',
+                       15: 'Pentadecimal',
+                       16: 'Hexadecimal',
+                       17: 'Heptadecimal',
+                       18: 'Octodecimal',
+                       19: 'Enneadecimal',
+                       20: 'Vigesimal'}
+
     while True:
         input_value = input('Type in a decimal number: ')
-        if not input_test(input_value):
+        numeral_system = input(
+            '''Choose a natural number (greater than 2) as the base of the numeral system,\nto which you want to convert (e.g. \'2\' for binary): ''')
+        if not input_test(input_value) or not input_test(numeral_system) or numeral_system == '1':
             print('This is not a valid entry! Try again: ')
             print()
             continue
-        # print(convert_decimals(int(input_value), 3))
+
+        converted_num = convert_decimals(int(input_value), 3)
+        print(f'"{proper_display(converted_num)}"')
         print()
-        proper_display('0')
-        proper_display('01')
-        proper_display('012')
-        proper_display('0123')
-        proper_display('01234')
-        proper_display('012345')
-        proper_display('0123456')
 
 
 def input_test(number):
