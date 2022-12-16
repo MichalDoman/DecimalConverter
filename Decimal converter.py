@@ -27,17 +27,22 @@ def main():
                        20: 'Vigesimal'}
 
     while True:
-        input_value = input('Type in a decimal number: ')
+        input_value = input('*** Type in a decimal (and natural) number: ')
         numeral_system = input(
             '''Choose a natural number (greater than 2) as the base of the numeral system,\nto which you want to convert (e.g. \'2\' for binary): ''')
         if not input_test(input_value) or not input_test(numeral_system) or numeral_system == '1':
             print('This is not a valid entry! Try again: ')
             print()
             continue
-
-        converted_num = convert_decimals(int(input_value), 3)
-        print(f'"{proper_display(converted_num)}"')
         print()
+
+        if numeral_system == '10':
+            print(f'It is what you have just typed in: "{input_value}". Should\'t be a surprise though...')
+            print()
+        else:
+            converted_num = convert_decimals(int(input_value), int(numeral_system))
+            print(f'"{proper_display(converted_num)}"')
+            print()
 
 
 def input_test(number):
