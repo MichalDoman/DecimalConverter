@@ -1,4 +1,5 @@
 from math import floor
+from numeral_systems import numeral_systems
 
 
 def main():
@@ -6,25 +7,6 @@ def main():
     print(' Welcome to the Decimal Converter!')
     print('-----------------------------------')
 
-    numeral_systems = {2: 'Binary',
-                       3: 'Ternary',
-                       4: 'Quaternary',
-                       5: 'Quinary',
-                       6: 'Senary',
-                       7: 'Septenary',
-                       8: 'Octal',
-                       9: 'Nonary',
-                       10: 'Decimal',
-                       11: 'Undecimal',
-                       12: 'Duodecimal',
-                       13: 'Tridecimal',
-                       14: 'Tetradecimal',
-                       15: 'Pentadecimal',
-                       16: 'Hexadecimal',
-                       17: 'Heptadecimal',
-                       18: 'Octodecimal',
-                       19: 'Enneadecimal',
-                       20: 'Vigesimal'}
 
     while True:
         input_value = input('*** Type in a decimal (and natural) number: ')
@@ -41,7 +23,8 @@ def main():
             print()
         else:
             converted_num = convert_decimals(int(input_value), int(numeral_system))
-            print(f'"{proper_display(converted_num)}"')
+            print(converted_num)
+            # print(f'"{proper_display(converted_num)}"')
             print()
 
 
@@ -49,7 +32,7 @@ def input_test(number):
     """Checks if the parameter is a natural number.
 
     :param: an element to be checked.
-    :return: returns a boolean whether the element is a natural number or not.
+    :return: returns a boolean whether the element is a natural number or not (excluding 0).
     """
 
     if number.isdigit() and number != '0':
@@ -72,6 +55,7 @@ def conversion_test(number, outcome, numeral_system):  # takes only reversed num
 def convert_decimals(number, numeral_system):
     total = 0
     new_digits = []
+    first_loop = True
 
     i = 0
     while (numeral_system ** i) <= number:
@@ -85,9 +69,8 @@ def convert_decimals(number, numeral_system):
     new_digits.append(digit)
     total += (numeral_system ** (i - 1)) * int(digit)
     diff = number - total
-    new_digits_str = ''.join(new_digits)
-
-    while not conversion_test(number, new_digits_str, numeral_system):
+    print(new_digits)
+    while not conversion_test(number, new_digits, numeral_system):
         i = 0
         while (numeral_system ** i) <= diff:
             i += 1
@@ -96,19 +79,19 @@ def convert_decimals(number, numeral_system):
         diff = number - total
 
         new_digits[i - 1] = digit
+        print(new_digits)
+
+    if numeral_system > 9:
+        new_digits_str = ':'.join(new_digits)
+    else:
         new_digits_str = ''.join(new_digits)
     return new_digits_str
 
 
-def proper_display(number_str, numeral_system):
+def proper_display(number_str):
     new_str = ''
     str_part = ''
     temp = ''
-
-
-    # TODO:if numeral_system < 10:
-    #  else:
-    #  after 2 digits ';'.join()
 
     for digit in number_str:
         str_part += digit
