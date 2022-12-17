@@ -9,7 +9,7 @@ def main():
 
 
     while True:
-        input_value = input('*** Type in a decimal (and natural) number: ')
+        input_value = input('*** Type in a decimal (and natural) number to be converted: ')
         numeral_system = input(
             '''Choose a natural number (greater than 2) as the base of the numeral system,\nto which you want to convert (e.g. \'2\' for binary): ''')
         if not input_test(input_value) or not input_test(numeral_system) or numeral_system == '1':
@@ -22,9 +22,8 @@ def main():
             print(f'It is what you have just typed in: "{input_value}". Should\'t be a surprise though...')
             print()
         else:
-            converted_num = convert_decimals(int(input_value), int(numeral_system))
-            print(converted_num)
-            # print(f'"{proper_display(converted_num)}"')
+            converted_num_lst = convert_decimals(int(input_value), int(numeral_system))
+            print(f'"{proper_display(converted_num_lst, int(numeral_system))}"')
             print()
 
 
@@ -69,7 +68,6 @@ def convert_decimals(number, numeral_system):
     new_digits.append(digit)
     total += (numeral_system ** (i - 1)) * int(digit)
     diff = number - total
-    print(new_digits)
     while not conversion_test(number, new_digits, numeral_system):
         i = 0
         while (numeral_system ** i) <= diff:
@@ -79,32 +77,30 @@ def convert_decimals(number, numeral_system):
         diff = number - total
 
         new_digits[i - 1] = digit
-        print(new_digits)
 
+    return new_digits
+
+
+def proper_display(new_digits, numeral_system):
     if numeral_system > 9:
-        new_digits_str = ':'.join(new_digits)
+        pass
     else:
-        new_digits_str = ''.join(new_digits)
-    return new_digits_str
+        new_str = ''
+        str_part = ''
+        temp = ''
 
+        for digit in new_digits:
+            str_part += digit
+            temp += digit
+            if len(str_part) % 3 == 0:
+                temp = ''
+                str_part += ' '
+                new_str += str_part
+                str_part = ''
+        new_str += temp
+        new_str = new_str[::-1].strip()
+        return new_str
 
-def proper_display(number_str):
-    new_str = ''
-    str_part = ''
-    temp = ''
-
-    for digit in number_str:
-        str_part += digit
-        temp += digit
-        if len(str_part) % 3 == 0:
-            temp = ''
-            str_part += ' '
-            new_str += str_part
-            str_part = ''
-    new_str += temp
-    new_str = new_str[::-1].strip()
-
-    return new_str
 
 
 if __name__ == '__main__':
