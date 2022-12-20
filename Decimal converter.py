@@ -7,7 +7,6 @@ def main():
     print(' Welcome to the Decimal Converter!')
     print('-----------------------------------')
 
-
     while True:
         input_value = input('*** Type in a decimal (and natural) number to be converted: ')
         numeral_system = input(
@@ -54,7 +53,7 @@ def conversion_test(number, outcome, numeral_system):  # takes only reversed num
 def convert_decimals(number, numeral_system):
     total = 0
     new_digits = []
-    first_loop = True
+    first_loop = True  # Maybe able to shorten the code
 
     i = 0
     while (numeral_system ** i) <= number:
@@ -82,13 +81,20 @@ def convert_decimals(number, numeral_system):
 
 
 def proper_display(new_digits, numeral_system):
+    new_str = ''
+
     if numeral_system > 9:
-        pass
+        for digit in new_digits[::-1]:
+            if len(digit) == len(str(numeral_system)):
+                new_str += digit
+            else:
+                new_str += ('0' * (len(str(numeral_system)) - len(digit))) + str(digit)
+            new_str += ' : '
+        new_str = new_str.strip(' : ')
+
     else:
-        new_str = ''
         str_part = ''
         temp = ''
-
         for digit in new_digits:
             str_part += digit
             temp += digit
@@ -99,8 +105,8 @@ def proper_display(new_digits, numeral_system):
                 str_part = ''
         new_str += temp
         new_str = new_str[::-1].strip()
-        return new_str
 
+    return new_str
 
 
 if __name__ == '__main__':
