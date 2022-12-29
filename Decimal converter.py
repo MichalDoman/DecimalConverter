@@ -89,8 +89,8 @@ def proper_display(new_digits, numeral_system):
                 new_str += digit
             else:
                 new_str += ('0' * (len(str(numeral_system)) - len(digit))) + str(digit)
-            new_str += ' : '
-        new_str = new_str.strip(' : ')
+            new_str += ' ; '
+        new_str = new_str.strip(' ; ')
 
     else:
         str_part = ''
