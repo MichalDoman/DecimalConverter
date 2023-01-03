@@ -1,9 +1,6 @@
 # DecimalConverter (own project)
 
 ___
-
-### About the project:
-
 ### How it works:
 
 This app converts any decimal number into an equivalent in any other numeral system. When the script is run, the user
